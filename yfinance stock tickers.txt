@@ -1,0 +1,6 @@
+COALINDIA.NS	------ COAL INDIA LTD	
+SBIN.NS			------ STATE BK OF INDIA
+NESTLEIND.NS	------NESTLE INDIA
+LICI.NS			------ Life Insurance Corp of India
+RELIANCE.NS	------ Reliance Industries Limited
+NIFTYBEES.NS     ------ NIPPON INDIA MF
