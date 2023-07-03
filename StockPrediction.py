@@ -9,20 +9,14 @@ Created on Tue Nov  1 14:11:54 2022
 ## Import Libraries
 
 import plotly.express as px
-import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as plt
-import pandas_datareader as data
-from keras.models import load_model
 import streamlit as st
 from datetime import datetime
-import matplotlib.pyplot as plt
 import yfinance as yf
-import tensorflow as tf
 import plotly.graph_objs as plot
 import mplfinance as mpf
 import warnings
-import plotly.graph_objs as plot
 warnings.filterwarnings('ignore')
 
 
