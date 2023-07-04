@@ -1,4 +1,4 @@
---no-cache-dir
+
 plotly==5.3.1
 matplotlib==3.4.3
 streamlit==0.84.2
