@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 from datetime import datetime
+import pytz
 import yfinance as yf
 import plotly.graph_objs as plot
 import mplfinance as mpf
@@ -89,7 +90,7 @@ df = pd.DataFrame()  # Define an empty DataFrame
 if user_input:
     # Data downloading
     df = yf.download(user_input, start=start_date, end=end_date)
-    df.index = pd.to_datetime(df.index)  # Convert index to DatetimeIndex
+    df.index = pd.to_datetime(df.index).tz_localize('UTC').tz_convert(pytz.timezone('your_timezone'))
     # Project title
     st.subheader(f'Data for {user_input} from {start_date_str} to {end_date_str}')
     
