@@ -8,7 +8,6 @@ Created on Tue Nov  1 14:11:54 2022
 
 import plotly.express as px
 import pandas as pd
-import pandas_datareader as data
 import matplotlib.pyplot as plt
 import streamlit as st
 from datetime import datetime
