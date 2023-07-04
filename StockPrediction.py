@@ -6,10 +6,9 @@ Created on Tue Nov  1 14:11:54 2022
 """
 
 
-## Import Libraries
-
 import plotly.express as px
 import pandas as pd
+import pandas_datareader as data
 import matplotlib.pyplot as plt
 import streamlit as st
 from datetime import datetime
@@ -17,11 +16,66 @@ import yfinance as yf
 import plotly.graph_objs as plot
 import mplfinance as mpf
 import warnings
+
 warnings.filterwarnings('ignore')
 
+# Customizing the sidebar with CSS
+st.markdown(
+    """
+    <style>
+    .sidebar .sidebar-content {
+        background-color: #f8f9fa;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar .sidebar-content .block-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+    }
+    .sidebar .sidebar-content .block-container:first-child {
+        margin-top: 0;
+    }
+    .sidebar .sidebar-content .block-container:last-child {
+        margin-bottom: 0;
+    }
+    .sidebar .sidebar-content .block-container h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #333333;
+    }
+    .sidebar .sidebar-content .block-container ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .sidebar .sidebar-content .block-container ul li {
+        margin-bottom: 5px;
+    }
+    .sidebar .sidebar-content .block-container ul li a {
+        text-decoration: none;
+        color: #333333;
+        font-weight: bold;
+    }
+    .sidebar .sidebar-content .block-container ul li a:hover {
+        color: #007bff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-#Project title
-st.title(f'Which Stock your Looking For:')
+# Sidebar Navigation
+st.sidebar.title('Navigation')
+navigation = st.sidebar.radio('Go to:', ('Home', 'Market Trends', 'Prediction'))
+
+if navigation == 'Home':
+    st.write('Welcome to the Home page!')
+    st.write('Please enter a stock ticker and select a navigation option from the sidebar.')
+    
+# Project title
+st.title(f'Which Stock are you Looking For:')
 user_input = st.text_input('Enter Stock Ticker From Yahoo Finance', '')
 
 ##Date formatting
@@ -30,33 +84,29 @@ end_date_str = st.date_input('End Date', datetime.today())
 start_date = datetime.combine(start_date_str, datetime.min.time())
 end_date = datetime.combine(end_date_str, datetime.max.time())
 
-
-
 df = pd.DataFrame()  # Define an empty DataFrame
-
 
 
 if user_input:
     # Data downloading
     df = yf.download(user_input, start=start_date, end=end_date)
-    #Project title
+    # Project title
     st.subheader(f'Data for {user_input} from {start_date_str} to {end_date_str}')
     
-    #Button to show the data
+    # Button to show the data
     if st.button("Prices & Volumes"):
         st.write(df.describe())
-    if st.button ("Close"):
+    if st.button("Close"):
         st.write("")
 
 
-if user_input:
-    option = st.selectbox('What are you looking for?',('Market Trends', 'Prediction'))
-    if option == 'Market Trends':
+
+if navigation == 'Market Trends':
+    if user_input:
         st.title(f'Advanced Charts for {user_input}')
         #Tabs to show different graphs
         tab1,tab2,tab3,tab4,tab5 = st.tabs(["Line chart","Candlestick Chart","Moving Averages","RSI","Bollinger Bands"])
-        
-        
+
         with tab1:
             st.subheader(f'Price variation over the years For : {user_input} from {start_date_str} to {end_date_str}')
             st.subheader(f'Closing Price vs Time chart for {user_input}')       
@@ -129,8 +179,9 @@ if user_input:
             ax3.legend()
             st.pyplot(fig_BB)
 
-    elif option == 'Prediction':
-        st.subheader(f'Prediction for {user_input}')        
+if navigation == 'Prediction':
+    st.title(f'Prediction for {user_input}')
+       
 
 
 
