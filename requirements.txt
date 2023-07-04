@@ -3,5 +3,7 @@ matplotlib==3.4.3
 streamlit==0.84.2
 yfinance==0.1.63
 mplfinance==0.12.7a17
+pytz>=2021.3
+
 
 
