@@ -89,6 +89,7 @@ df = pd.DataFrame()  # Define an empty DataFrame
 if user_input:
     # Data downloading
     df = yf.download(user_input, start=start_date, end=end_date)
+    df.index = pd.to_datetime(df.index)  # Convert index to DatetimeIndex
     # Project title
     st.subheader(f'Data for {user_input} from {start_date_str} to {end_date_str}')
     
